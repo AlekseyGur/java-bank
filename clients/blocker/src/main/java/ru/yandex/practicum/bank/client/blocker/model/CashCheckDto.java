@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -45,10 +46,9 @@ public class CashCheckDto {
 
   /**
    * Номер счёта для проверки
-   * 
    * @return accountNumber
    */
-  @NotNull
+  @NotNull 
   @Schema(name = "accountNumber", example = "40817810099910001111", description = "Номер счёта для проверки", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("accountNumber")
   public String getAccountNumber() {
@@ -66,11 +66,9 @@ public class CashCheckDto {
 
   /**
    * Сумма операции
-   * 
    * @return amount
    */
-  @NotNull
-  @Valid
+  @NotNull @Valid 
   @Schema(name = "amount", example = "1000.00", description = "Сумма операции", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("amount")
   public BigDecimal getAmount() {
@@ -120,3 +118,4 @@ public class CashCheckDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

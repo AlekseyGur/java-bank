@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -47,11 +48,9 @@ public class MailDto {
 
   /**
    * Email получателя
-   * 
    * @return email
    */
-  @NotNull
-  @jakarta.validation.constraints.Email
+  @NotNull @jakarta.validation.constraints.Email 
   @Schema(name = "email", example = "user@example.com", description = "Email получателя", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
@@ -69,10 +68,9 @@ public class MailDto {
 
   /**
    * Тема письма
-   * 
    * @return subject
    */
-  @NotNull
+  @NotNull 
   @Schema(name = "subject", example = "Уведомление о платеже", description = "Тема письма", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("subject")
   public String getSubject() {
@@ -90,10 +88,9 @@ public class MailDto {
 
   /**
    * Текст письма
-   * 
    * @return text
    */
-  @NotNull
+  @NotNull 
   @Schema(name = "text", example = "Ваш перевод успешно выполнен.", description = "Текст письма", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("text")
   public String getText() {
@@ -145,3 +142,4 @@ public class MailDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

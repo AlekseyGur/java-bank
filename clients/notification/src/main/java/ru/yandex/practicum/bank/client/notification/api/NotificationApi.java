@@ -40,18 +40,29 @@ public interface NotificationApi {
     /**
      * POST /mail : Отправка email-сообщения
      *
-     * @param mailDto (required)
+     * @param mailDto  (required)
      * @return Сообщение успешно отправлено (status code 200)
      */
-    @Operation(operationId = "sendMail", summary = "Отправка email-сообщения", tags = { "notification" }, responses = {
+    @Operation(
+        operationId = "sendMail",
+        summary = "Отправка email-сообщения",
+        tags = { "notification" },
+        responses = {
             @ApiResponse(responseCode = "200", description = "Сообщение успешно отправлено")
-    }, security = {
+        },
+        security = {
             @SecurityRequirement(name = "bearerAuth")
-    })
-    @RequestMapping(method = RequestMethod.POST, value = "/mail", consumes = "application/json")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/mail",
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     void sendMail(
-            @Parameter(name = "MailDto", description = "", required = true) @Valid @RequestBody MailDto mailDto);
+        @Parameter(name = "MailDto", description = "", required = true) @Valid @RequestBody MailDto mailDto
+    );
 
 }

@@ -13,11 +13,11 @@ class TransferControllerTest extends AbstractIntegrationTest {
     @Test
     void transfer_ShouldRedirectToHome_WhenValid() throws Exception {
         mockMvc.perform(post("/transfer")
-                .param("fromAccount", "ACC-1")
-                .param("toAccount", "ACC-2")
-                .param("amount", "1000.00")
-                .with(mockOAuth2User())
-                .with(csrf()))
+                        .param("fromAccount", "ACC-1")
+                        .param("toAccount", "ACC-2")
+                        .param("amount", "1000.00")
+                        .with(mockOAuth2User())
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
 
@@ -27,11 +27,11 @@ class TransferControllerTest extends AbstractIntegrationTest {
     @Test
     void transfer_ShouldReturnError_WhenInvalid() throws Exception {
         mockMvc.perform(post("/transfer")
-                .param("fromAccount", "")
-                .param("toAccount", "")
-                .param("amount", "")
-                .with(mockOAuth2User())
-                .with(csrf()))
+                        .param("fromAccount", "")
+                        .param("toAccount", "")
+                        .param("amount", "")
+                        .with(mockOAuth2User())
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("error"))
                 .andExpect(model().attributeExists("formErrors"));

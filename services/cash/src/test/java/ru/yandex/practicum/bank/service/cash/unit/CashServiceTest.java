@@ -27,18 +27,9 @@ class CashServiceTest {
 
     @Configuration
     static class Config {
-        @Bean
-        AccountClient accountClient() {
-            return mock(AccountClient.class);
-        }
-
-        @Bean
-        BlockerClient blockerClient() {
-            return mock(BlockerClient.class);
-        }
-
-        @Bean
-        CashService cashService(AccountClient accountClient, BlockerClient blockerClient) {
+        @Bean AccountClient accountClient() { return mock(AccountClient.class); }
+        @Bean BlockerClient blockerClient() { return mock(BlockerClient.class); }
+        @Bean CashService cashService(AccountClient accountClient, BlockerClient blockerClient) {
             return new CashServiceImpl(accountClient, blockerClient);
         }
     }
@@ -81,24 +72,29 @@ class CashServiceTest {
     void putCash_ShouldCallChangeBalance() {
         cashService.putCash(transactionDto, user);
 
-        verify(accountClient).changeBalance(eq(1L), argThat(dto -> dto.getAmount().equals(new BigDecimal("1500")) &&
-                dto.getVersion().equals(1L)));
+        verify(accountClient).changeBalance(eq(1L), argThat(dto ->
+                dto.getAmount().equals(new BigDecimal("1500")) &&
+                        dto.getVersion().equals(1L)
+        ));
     }
 
     @Test
     void withdrawCash_ShouldCallChangeBalance() {
         cashService.withdrawCash(transactionDto, user);
 
-        verify(accountClient).changeBalance(eq(1L), argThat(dto -> dto.getAmount().equals(new BigDecimal("500")) &&
-                dto.getVersion().equals(1L)));
+        verify(accountClient).changeBalance(eq(1L), argThat(dto ->
+                dto.getAmount().equals(new BigDecimal("500")) &&
+                        dto.getVersion().equals(1L)
+        ));
     }
 
     @Test
     void withdrawCash_ShouldThrow_WhenInsufficientFunds() {
         accountDto.setBalance(new BigDecimal("100"));
 
-        BadRequestException ex = assertThrows(BadRequestException.class,
-                () -> cashService.withdrawCash(transactionDto, user));
+        BadRequestException ex = assertThrows(BadRequestException.class, () ->
+                cashService.withdrawCash(transactionDto, user)
+        );
 
         assertEquals("Insufficient funds in the account", ex.getMessage());
         verify(accountClient, never()).changeBalance(anyLong(), any());
@@ -108,15 +104,17 @@ class CashServiceTest {
     void shouldThrowAccessDenied_WhenUserNotOwner() {
         accountDto.setUserId("otherUser");
 
-        assertThrows(org.springframework.security.access.AccessDeniedException.class,
-                () -> cashService.putCash(transactionDto, user));
+        assertThrows(org.springframework.security.access.AccessDeniedException.class, () ->
+                cashService.putCash(transactionDto, user)
+        );
     }
 
     @Test
     void shouldThrowAccessDenied_WhenCheckFails() {
         when(blockerClient.checkCash(any())).thenReturn(new ResultCheckDto(false));
 
-        assertThrows(org.springframework.security.access.AccessDeniedException.class,
-                () -> cashService.putCash(transactionDto, user));
+        assertThrows(org.springframework.security.access.AccessDeniedException.class, () ->
+                cashService.putCash(transactionDto, user)
+        );
     }
 }

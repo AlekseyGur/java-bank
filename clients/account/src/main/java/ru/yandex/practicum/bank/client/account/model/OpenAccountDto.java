@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -43,11 +44,9 @@ public class OpenAccountDto {
 
   /**
    * Get currency
-   * 
    * @return currency
    */
-  @NotNull
-  @Valid
+  @NotNull @Valid 
   @Schema(name = "currency", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("currency")
   public Currency getCurrency() {
@@ -95,3 +94,4 @@ public class OpenAccountDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

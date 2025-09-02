@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -47,11 +48,9 @@ public class RateDto {
 
   /**
    * Get currency
-   * 
    * @return currency
    */
-  @NotNull
-  @Valid
+  @NotNull @Valid 
   @Schema(name = "currency", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("currency")
   public Currency getCurrency() {
@@ -69,11 +68,9 @@ public class RateDto {
 
   /**
    * Курс по отношению к базовой валюте (RUB)
-   * 
    * @return value
    */
-  @NotNull
-  @Valid
+  @NotNull @Valid 
   @Schema(name = "value", example = "5000.00", description = "Курс по отношению к базовой валюте (RUB)", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("value")
   public BigDecimal getValue() {
@@ -123,3 +120,4 @@ public class RateDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

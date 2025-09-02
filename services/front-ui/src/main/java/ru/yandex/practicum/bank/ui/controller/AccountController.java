@@ -22,8 +22,8 @@ public class AccountController {
 
     @PostMapping
     public String addAccount(@Valid @ModelAttribute("account") OpenAccountDto openAccountDto,
-            BindingResult result,
-            Model model) {
+                             BindingResult result,
+                             Model model) {
         if (result.hasErrors()) {
             model.addAttribute("formErrors", result.getAllErrors());
 

@@ -32,24 +32,10 @@ class AccountServiceTest {
 
     @Configuration
     static class Config {
-        @Bean
-        AccountRepository accountRepository() {
-            return mock(AccountRepository.class);
-        }
-
-        @Bean
-        AccountMapper accountMapper() {
-            return mock(AccountMapper.class);
-        }
-
-        @Bean
-        NumberAccountService numberAccountService() {
-            return mock(NumberAccountService.class);
-        }
-
-        @Bean
-        AccountService accountService(AccountRepository accountRepository, AccountMapper accountMapper,
-                NumberAccountService numberAccountService) {
+        @Bean AccountRepository accountRepository() { return mock(AccountRepository.class); }
+        @Bean AccountMapper accountMapper() { return mock(AccountMapper.class); }
+        @Bean NumberAccountService numberAccountService() { return mock(NumberAccountService.class); }
+        @Bean AccountService accountService(AccountRepository accountRepository, AccountMapper accountMapper, NumberAccountService numberAccountService) {
             return new AccountServiceImpl(accountRepository, accountMapper, numberAccountService);
         }
     }

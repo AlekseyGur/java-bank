@@ -30,7 +30,7 @@ class UserAccountControllerTest extends AbstractIntegrationTest {
     @Test
     void getAccounts_ShouldReturnUserAccounts() throws Exception {
         mockMvc.perform(get("/user")
-                .header(AUTH_HEADER, BEARER_TOKEN))
+                        .header(AUTH_HEADER, BEARER_TOKEN))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].userId").value(userId));
     }
@@ -38,7 +38,7 @@ class UserAccountControllerTest extends AbstractIntegrationTest {
     @Test
     void getAccountsById_ShouldReturnAccountsForOtherUser() throws Exception {
         mockMvc.perform(get("/user/" + userId)
-                .header(AUTH_HEADER, BEARER_TOKEN))
+                        .header(AUTH_HEADER, BEARER_TOKEN))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].userId").value(userId));
     }
@@ -49,9 +49,9 @@ class UserAccountControllerTest extends AbstractIntegrationTest {
         dto.setCurrency(Currency.USD);
 
         mockMvc.perform(post("/user")
-                .header(AUTH_HEADER, BEARER_TOKEN)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                        .header(AUTH_HEADER, BEARER_TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.userId").value(userId))
                 .andExpect(jsonPath("$.currency").value("USD"));
@@ -60,7 +60,7 @@ class UserAccountControllerTest extends AbstractIntegrationTest {
     @Test
     void deleteAccount_ShouldRemoveAccount() throws Exception {
         mockMvc.perform(delete("/user/1")
-                .header(AUTH_HEADER, BEARER_TOKEN))
+                        .header(AUTH_HEADER, BEARER_TOKEN))
                 .andExpect(status().isOk());
     }
 }

@@ -42,42 +42,64 @@ public interface BlockerApi {
     /**
      * POST /cash : Проверка операции пополнения
      *
-     * @param cashCheckDto (required)
+     * @param cashCheckDto  (required)
      * @return Результат проверки (status code 200)
      */
-    @Operation(operationId = "checkCash", summary = "Проверка операции пополнения", tags = { "blocker" }, responses = {
+    @Operation(
+        operationId = "checkCash",
+        summary = "Проверка операции пополнения",
+        tags = { "blocker" },
+        responses = {
             @ApiResponse(responseCode = "200", description = "Результат проверки", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = ResultCheckDto.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ResultCheckDto.class))
             })
-    }, security = {
+        },
+        security = {
             @SecurityRequirement(name = "bearerAuth")
-    })
-    @RequestMapping(method = RequestMethod.POST, value = "/cash", produces = {
-            "application/json" }, consumes = "application/json")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/cash",
+        produces = { "application/json" },
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     ResultCheckDto checkCash(
-            @Parameter(name = "CashCheckDto", description = "", required = true) @Valid @RequestBody CashCheckDto cashCheckDto);
+        @Parameter(name = "CashCheckDto", description = "", required = true) @Valid @RequestBody CashCheckDto cashCheckDto
+    );
+
 
     /**
      * POST /transfer : Проверка операции перевода
      *
-     * @param transferCheckDto (required)
+     * @param transferCheckDto  (required)
      * @return Результат проверки (status code 200)
      */
-    @Operation(operationId = "checkTransfer", summary = "Проверка операции перевода", tags = {
-            "blocker" }, responses = {
-                    @ApiResponse(responseCode = "200", description = "Результат проверки", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = ResultCheckDto.class))
-                    })
-            }, security = {
-                    @SecurityRequirement(name = "bearerAuth")
+    @Operation(
+        operationId = "checkTransfer",
+        summary = "Проверка операции перевода",
+        tags = { "blocker" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Результат проверки", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ResultCheckDto.class))
             })
-    @RequestMapping(method = RequestMethod.POST, value = "/transfer", produces = {
-            "application/json" }, consumes = "application/json")
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/transfer",
+        produces = { "application/json" },
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     ResultCheckDto checkTransfer(
-            @Parameter(name = "TransferCheckDto", description = "", required = true) @Valid @RequestBody TransferCheckDto transferCheckDto);
+        @Parameter(name = "TransferCheckDto", description = "", required = true) @Valid @RequestBody TransferCheckDto transferCheckDto
+    );
 
 }

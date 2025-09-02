@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -45,11 +46,9 @@ public class ChangeBalanceDto {
 
   /**
    * Сумма изменения баланса (BigDecimal)
-   * 
    * @return amount
    */
-  @NotNull
-  @Valid
+  @NotNull @Valid 
   @Schema(name = "amount", example = "5000.00", description = "Сумма изменения баланса (BigDecimal)", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("amount")
   public BigDecimal getAmount() {
@@ -67,10 +66,9 @@ public class ChangeBalanceDto {
 
   /**
    * Get version
-   * 
    * @return version
    */
-  @NotNull
+  @NotNull 
   @Schema(name = "version", example = "1", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("version")
   public Long getVersion() {
@@ -120,3 +118,4 @@ public class ChangeBalanceDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

@@ -16,8 +16,8 @@ public class CashClientConfiguration {
 
     @Bean
     public CashApi cashApiClient(Feign.Builder feignBuilder,
-            FeignSecurityConfig authConfig,
-            @Value("${api.cash}") String baseUrl) {
+                                 FeignSecurityConfig authConfig,
+                                 @Value("${api.cash}") String baseUrl) {
 
         return feignBuilder
                 .requestInterceptor(authConfig.userTokenRelayInterceptor())

@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 class ExchangeControllerTest extends AbstractIntegrationTest {
 
     private static final String AUTH_HEADER = "Authorization";
@@ -37,9 +38,9 @@ class ExchangeControllerTest extends AbstractIntegrationTest {
         dto.setAmount(new BigDecimal("2.00"));
 
         mockMvc.perform(post("/convert")
-                .header(AUTH_HEADER, BEARER_TOKEN)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                        .header(AUTH_HEADER, BEARER_TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result").exists());
     }
@@ -49,16 +50,16 @@ class ExchangeControllerTest extends AbstractIntegrationTest {
         RateDto dto = new RateDto(Currency.USD, new BigDecimal("111.11"));
 
         mockMvc.perform(post("/accept")
-                .header(AUTH_HEADER, BEARER_TOKEN)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                        .header(AUTH_HEADER, BEARER_TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk());
     }
 
     @Test
     void rates_ShouldReturnAvailableRates() throws Exception {
         mockMvc.perform(get("/rates")
-                .header(AUTH_HEADER, BEARER_TOKEN))
+                        .header(AUTH_HEADER, BEARER_TOKEN))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].currency").exists())
@@ -73,10 +74,11 @@ class ExchangeControllerTest extends AbstractIntegrationTest {
         dto.setAmount(new BigDecimal("123.45"));
 
         mockMvc.perform(post("/convert")
-                .header(AUTH_HEADER, BEARER_TOKEN)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                        .header(AUTH_HEADER, BEARER_TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result").value("123.45"));
     }
 }
+

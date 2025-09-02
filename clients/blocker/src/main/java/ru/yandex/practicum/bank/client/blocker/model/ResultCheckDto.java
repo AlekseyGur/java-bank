@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -41,10 +42,9 @@ public class ResultCheckDto {
 
   /**
    * Результат проверки (true — операция разрешена)
-   * 
    * @return result
    */
-  @NotNull
+  @NotNull 
   @Schema(name = "result", example = "true", description = "Результат проверки (true — операция разрешена)", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("result")
   public Boolean getResult() {
@@ -92,3 +92,4 @@ public class ResultCheckDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

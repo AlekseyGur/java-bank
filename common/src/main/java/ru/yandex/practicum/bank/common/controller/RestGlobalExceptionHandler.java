@@ -46,6 +46,8 @@ public class RestGlobalExceptionHandler extends ResponseEntityExceptionHandler {
                         "timestamp", ZonedDateTime.now().toString(),
                         "status", status.value(),
                         "error", status.getReasonPhrase(),
-                        "message", message));
+                        "message", message
+                ));
     }
 }
+

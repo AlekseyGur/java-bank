@@ -43,23 +43,34 @@ public interface ExchangeApi {
     /**
      * POST /convert : Конвертировать из одной валюты в другую
      *
-     * @param convertRequestDto (required)
+     * @param convertRequestDto  (required)
      * @return Результат конверсии (status code 200)
      */
-    @Operation(operationId = "convertCurrency", summary = "Конвертировать из одной валюты в другую", tags = {
-            "Exchange" }, responses = {
-                    @ApiResponse(responseCode = "200", description = "Результат конверсии", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = ConvertResponseDto.class))
-                    })
-            }, security = {
-                    @SecurityRequirement(name = "bearerAuth")
+    @Operation(
+        operationId = "convertCurrency",
+        summary = "Конвертировать из одной валюты в другую",
+        tags = { "Exchange" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Результат конверсии", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ConvertResponseDto.class))
             })
-    @RequestMapping(method = RequestMethod.POST, value = "/convert", produces = {
-            "application/json" }, consumes = "application/json")
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/convert",
+        produces = { "application/json" },
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     ConvertResponseDto convertCurrency(
-            @Parameter(name = "ConvertRequestDto", description = "", required = true) @Valid @RequestBody ConvertRequestDto convertRequestDto);
+        @Parameter(name = "ConvertRequestDto", description = "", required = true) @Valid @RequestBody ConvertRequestDto convertRequestDto
+    );
+
 
     /**
      * GET /rates : Посмотреть все курсы обмена
@@ -67,38 +78,58 @@ public interface ExchangeApi {
      *
      * @return Список курсов (status code 200)
      */
-    @Operation(operationId = "getExchangeRates", summary = "Посмотреть все курсы обмена", description = "Не требуется авторизация", tags = {
-            "Exchange" }, responses = {
-                    @ApiResponse(responseCode = "200", description = "Список курсов", content = {
-                            @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RateDto.class)))
-                    })
+    @Operation(
+        operationId = "getExchangeRates",
+        summary = "Посмотреть все курсы обмена",
+        description = "Не требуется авторизация",
+        tags = { "Exchange" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Список курсов", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RateDto.class)))
             })
-    @RequestMapping(method = RequestMethod.GET, value = "/rates", produces = { "application/json" })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/rates",
+        produces = { "application/json" }
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     List<RateDto> getExchangeRates(
-
+        
     );
+
 
     /**
      * POST /accept : Добавить/обновить курс обмена
      *
-     * @param rateDto (required)
+     * @param rateDto  (required)
      * @return Курс сохранен (status code 200)
      */
-    @Operation(operationId = "updateExchangeRate", summary = "Добавить/обновить курс обмена", tags = {
-            "Exchange" }, responses = {
-                    @ApiResponse(responseCode = "200", description = "Курс сохранен", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateExchangeRate200Response.class))
-                    })
-            }, security = {
-                    @SecurityRequirement(name = "bearerAuth")
+    @Operation(
+        operationId = "updateExchangeRate",
+        summary = "Добавить/обновить курс обмена",
+        tags = { "Exchange" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Курс сохранен", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateExchangeRate200Response.class))
             })
-    @RequestMapping(method = RequestMethod.POST, value = "/accept", produces = {
-            "application/json" }, consumes = "application/json")
+        },
+        security = {
+            @SecurityRequirement(name = "bearerAuth")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/accept",
+        produces = { "application/json" },
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     UpdateExchangeRate200Response updateExchangeRate(
-            @Parameter(name = "RateDto", description = "", required = true) @Valid @RequestBody RateDto rateDto);
+        @Parameter(name = "RateDto", description = "", required = true) @Valid @RequestBody RateDto rateDto
+    );
 
 }

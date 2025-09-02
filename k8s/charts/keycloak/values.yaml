@@ -28,4 +28,4 @@ persistence:
     size: 1Gi
     accessModes: ["ReadWriteOnce"]
   theme:
-    hostPath: java-bank/keycloak-themes
+    hostPath: practicum-bank/keycloak-themes

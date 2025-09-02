@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -42,11 +43,9 @@ public class ConvertResponseDto {
 
   /**
    * Результат конверсии
-   * 
    * @return result
    */
-  @NotNull
-  @Valid
+  @NotNull @Valid 
   @Schema(name = "result", example = "5000.00", description = "Результат конверсии", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("result")
   public BigDecimal getResult() {
@@ -94,3 +93,4 @@ public class ConvertResponseDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

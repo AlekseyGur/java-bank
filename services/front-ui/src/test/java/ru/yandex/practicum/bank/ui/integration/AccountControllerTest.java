@@ -17,9 +17,9 @@ class AccountControllerTest extends AbstractIntegrationTest {
     @Test
     void addAccount_ShouldRedirectToHome_WhenValid() throws Exception {
         mockMvc.perform(post("/account")
-                .param("currency", "USD")
-                .with(mockOAuth2User())
-                .with(csrf()))
+                        .param("currency", "USD")
+                        .with(mockOAuth2User())
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
 
@@ -29,9 +29,9 @@ class AccountControllerTest extends AbstractIntegrationTest {
     @Test
     void addAccount_ShouldReturnErrorView_WhenInvalid() throws Exception {
         mockMvc.perform(post("/account")
-                .param("currency", "")
-                .with(mockOAuth2User())
-                .with(csrf()))
+                        .param("currency", "")
+                        .with(mockOAuth2User())
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("error"))
                 .andExpect(model().attributeExists("formErrors"));
@@ -40,8 +40,8 @@ class AccountControllerTest extends AbstractIntegrationTest {
     @Test
     void deleteAccount_ShouldRedirectToHome() throws Exception {
         mockMvc.perform(post("/account/delete/1")
-                .with(mockOAuth2User())
-                .with(csrf()))
+                        .with(mockOAuth2User())
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
 
@@ -59,7 +59,7 @@ class AccountControllerTest extends AbstractIntegrationTest {
         Mockito.when(accountClient.getAccountsByUserId(userId)).thenReturn(List.of(dto));
 
         mockMvc.perform(get("/account/account/user/" + userId)
-                .with(mockOAuth2User()))
+                        .with(mockOAuth2User()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].currency").value("USD"));

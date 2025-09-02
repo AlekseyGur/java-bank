@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -21,11 +22,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-06-13T22:41:27.854509+03:00[Europe/Moscow]", comments = "Generator version: 7.12.0")
 public enum AccountStatus {
-
+  
   ACTIVE("ACTIVE"),
-
+  
   BLOCKED("BLOCKED"),
-
+  
   CLOSED("CLOSED");
 
   private String value;
@@ -54,3 +55,4 @@ public enum AccountStatus {
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 }
+

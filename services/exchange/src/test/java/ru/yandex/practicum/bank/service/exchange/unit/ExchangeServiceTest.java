@@ -27,13 +27,8 @@ class ExchangeServiceTest {
 
     @Configuration
     static class Config {
-        @Bean
-        ExchangeRateRepository exchangeRateRepository() {
-            return mock(ExchangeRateRepository.class);
-        }
-
-        @Bean
-        ExchangeService exchangeService(ExchangeRateRepository repo) {
+        @Bean ExchangeRateRepository exchangeRateRepository() { return mock(ExchangeRateRepository.class); }
+        @Bean ExchangeService exchangeService(ExchangeRateRepository repo) {
             return new ExchangeServiceImpl(repo);
         }
     }
@@ -132,7 +127,8 @@ class ExchangeServiceTest {
 
         when(exchangeRateRepository.findByCurrency(Currency.USD)).thenReturn(Optional.empty());
 
-        RuntimeException ex = assertThrows(RuntimeException.class, () -> exchangeService.convert(request));
+        RuntimeException ex = assertThrows(RuntimeException.class, () ->
+                exchangeService.convert(request));
 
         assertTrue(ex.getMessage().contains("No course found for USD"));
     }
@@ -147,8 +143,10 @@ class ExchangeServiceTest {
 
         exchangeService.acceptRate(dto);
 
-        verify(exchangeRateRepository).save(argThat(rate -> rate.getCurrency() == Currency.EUR &&
-                rate.getValue().compareTo(new BigDecimal("123.45")) == 0));
+        verify(exchangeRateRepository).save(argThat(rate ->
+                rate.getCurrency() == Currency.EUR &&
+                        rate.getValue().compareTo(new BigDecimal("123.45")) == 0
+        ));
     }
 
     @Test
@@ -161,8 +159,10 @@ class ExchangeServiceTest {
 
         exchangeService.acceptRate(dto);
 
-        verify(exchangeRateRepository).save(argThat(rate -> rate.getCurrency() == Currency.USD &&
-                rate.getValue().compareTo(new BigDecimal("150.00")) == 0));
+        verify(exchangeRateRepository).save(argThat(rate ->
+                rate.getCurrency() == Currency.USD &&
+                        rate.getValue().compareTo(new BigDecimal("150.00")) == 0
+        ));
     }
 
     @Test

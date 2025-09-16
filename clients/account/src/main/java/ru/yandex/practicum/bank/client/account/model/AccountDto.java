@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -46,10 +47,9 @@ public class AccountDto {
 
   /**
    * Get id
-   * 
    * @return id
    */
-
+  
   @Schema(name = "id", example = "1001", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("id")
   public Long getId() {
@@ -67,10 +67,9 @@ public class AccountDto {
 
   /**
    * Get number
-   * 
    * @return number
    */
-
+  
   @Schema(name = "number", example = "40817810099910004321", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("number")
   public String getNumber() {
@@ -88,10 +87,9 @@ public class AccountDto {
 
   /**
    * Get userId
-   * 
    * @return userId
    */
-
+  
   @Schema(name = "userId", example = "user-123", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("userId")
   public String getUserId() {
@@ -109,10 +107,9 @@ public class AccountDto {
 
   /**
    * Сумма на счете (BigDecimal)
-   * 
    * @return balance
    */
-  @Valid
+  @Valid 
   @Schema(name = "balance", example = "5000.00", description = "Сумма на счете (BigDecimal)", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("balance")
   public BigDecimal getBalance() {
@@ -130,10 +127,9 @@ public class AccountDto {
 
   /**
    * Get status
-   * 
    * @return status
    */
-  @Valid
+  @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
   public AccountStatus getStatus() {
@@ -151,10 +147,9 @@ public class AccountDto {
 
   /**
    * Get currency
-   * 
    * @return currency
    */
-  @Valid
+  @Valid 
   @Schema(name = "currency", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("currency")
   public Currency getCurrency() {
@@ -172,10 +167,9 @@ public class AccountDto {
 
   /**
    * Get version
-   * 
    * @return version
    */
-
+  
   @Schema(name = "version", example = "5", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("version")
   public Long getVersion() {
@@ -235,3 +229,4 @@ public class AccountDto {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

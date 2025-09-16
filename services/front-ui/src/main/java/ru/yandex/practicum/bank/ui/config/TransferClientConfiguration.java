@@ -13,8 +13,8 @@ public class TransferClientConfiguration {
 
     @Bean
     public TransferApi transferApiClient(Feign.Builder feignBuilder,
-            FeignSecurityConfig authConfig,
-            @Value("${api.transfer}") String baseUrl) {
+                                     FeignSecurityConfig authConfig,
+                                     @Value("${api.transfer}") String baseUrl) {
 
         return feignBuilder
                 .requestInterceptor(authConfig.userTokenRelayInterceptor())

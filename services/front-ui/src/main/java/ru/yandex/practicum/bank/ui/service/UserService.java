@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface UserService {
     void edit(User user, UserFormDto userFormDto);
-
     void password(User user, PasswordUserFormDto passwordUserFormDto);
-
     List<UserItemDto> getAllOverUsers(User user);
 }

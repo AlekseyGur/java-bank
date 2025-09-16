@@ -40,35 +40,58 @@ public interface CashApi {
     /**
      * PUT /put : Пополнение счёта
      *
-     * @param cashTransactionDto (required)
+     * @param cashTransactionDto  (required)
      * @return Средства успешно зачислены (status code 200)
      */
-    @Operation(operationId = "putCash", summary = "Пополнение счёта", tags = { "Cash" }, responses = {
+    @Operation(
+        operationId = "putCash",
+        summary = "Пополнение счёта",
+        tags = { "Cash" },
+        responses = {
             @ApiResponse(responseCode = "200", description = "Средства успешно зачислены")
-    }, security = {
+        },
+        security = {
             @SecurityRequirement(name = "bearerAuth")
-    })
-    @RequestMapping(method = RequestMethod.PUT, value = "/put", consumes = "application/json")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/put",
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     void putCash(
-            @Parameter(name = "CashTransactionDto", description = "", required = true) @Valid @RequestBody CashTransactionDto cashTransactionDto);
+        @Parameter(name = "CashTransactionDto", description = "", required = true) @Valid @RequestBody CashTransactionDto cashTransactionDto
+    );
+
 
     /**
      * PUT /withdraw : Снятие со счёта
      *
-     * @param cashTransactionDto (required)
+     * @param cashTransactionDto  (required)
      * @return Средства успешно списаны (status code 200)
      */
-    @Operation(operationId = "withdrawCash", summary = "Снятие со счёта", tags = { "Cash" }, responses = {
+    @Operation(
+        operationId = "withdrawCash",
+        summary = "Снятие со счёта",
+        tags = { "Cash" },
+        responses = {
             @ApiResponse(responseCode = "200", description = "Средства успешно списаны")
-    }, security = {
+        },
+        security = {
             @SecurityRequirement(name = "bearerAuth")
-    })
-    @RequestMapping(method = RequestMethod.PUT, value = "/withdraw", consumes = "application/json")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/withdraw",
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     void withdrawCash(
-            @Parameter(name = "CashTransactionDto", description = "", required = true) @Valid @RequestBody CashTransactionDto cashTransactionDto);
+        @Parameter(name = "CashTransactionDto", description = "", required = true) @Valid @RequestBody CashTransactionDto cashTransactionDto
+    );
 
 }

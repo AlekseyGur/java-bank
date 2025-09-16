@@ -29,7 +29,7 @@ class AccountControllerTest extends AbstractIntegrationTest {
     @Test
     void getAccount_ShouldReturnAccountDto() throws Exception {
         mockMvc.perform(get("/ACC-123")
-                .header(AUTH_HEADER, BEARER_TOKEN))
+                        .header(AUTH_HEADER, BEARER_TOKEN))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.number").value("ACC-123"))
                 .andExpect(jsonPath("$.currency").value("RUB"))
@@ -39,7 +39,7 @@ class AccountControllerTest extends AbstractIntegrationTest {
     @Test
     void blockAccount_ShouldReturnOk() throws Exception {
         mockMvc.perform(patch("/1/block")
-                .header(AUTH_HEADER, BEARER_TOKEN))
+                        .header(AUTH_HEADER, BEARER_TOKEN))
                 .andExpect(status().isOk());
     }
 
@@ -50,9 +50,9 @@ class AccountControllerTest extends AbstractIntegrationTest {
         dto.setVersion(0L);
 
         mockMvc.perform(patch("/1/balance")
-                .header(AUTH_HEADER, BEARER_TOKEN)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                        .header(AUTH_HEADER, BEARER_TOKEN)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk());
     }
 }

@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import ru.yandex.practicum.bank.client.exchange.api.ExchangeClient;
 import ru.yandex.practicum.bank.client.exchange.model.Currency;
+import ru.yandex.practicum.bank.common.massage.Rate;
 import ru.yandex.practicum.bank.service.generator.exchange.scheduler.GeneratorExchangeScheduler;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import static org.mockito.Mockito.*;
 
@@ -20,25 +22,24 @@ class GeneratorExchangeSchedulerTest {
     @Configuration
     static class Config {
         @Bean
-        ExchangeClient exchangeClient() {
-            return mock(ExchangeClient.class);
+        public KafkaTemplate<String, Rate> kafkaTemplate() {
+            return mock(KafkaTemplate.class);
         }
 
-        @Bean
-        GeneratorExchangeScheduler generatorExchangeScheduler(ExchangeClient exchangeClient) {
-            return new GeneratorExchangeScheduler(exchangeClient);
+        @Bean GeneratorExchangeScheduler generatorExchangeScheduler(KafkaTemplate<String, Rate> kafkaTemplate) {
+            return new GeneratorExchangeScheduler(kafkaTemplate);
         }
     }
 
     @Autowired
-    private ExchangeClient exchangeClient;
+    private KafkaTemplate<String, Rate> kafkaTemplate;
 
     @Autowired
     private GeneratorExchangeScheduler generatorExchangeScheduler;
 
     @BeforeEach
     void setup() {
-        reset(exchangeClient);
+        reset(kafkaTemplate);
     }
 
     @Test
@@ -46,11 +47,18 @@ class GeneratorExchangeSchedulerTest {
         generatorExchangeScheduler.run();
 
         for (Currency currency : Currency.values()) {
-            verify(exchangeClient).updateExchangeRate(argThat(dto -> dto.getCurrency() == currency &&
-                    dto.getValue() != null &&
-                    dto.getValue().compareTo(BigDecimal.ZERO) > 0));
+            verify(kafkaTemplate, atLeastOnce()).send(
+                    anyString(),
+                    argThat(key -> key != null && !key.isEmpty()),
+                    argThat(rate ->
+                            rate != null &&
+                                    Objects.equals(rate.getCurrency(), currency.getValue()) &&
+                                    rate.getValue() != null &&
+                                    rate.getValue().compareTo(BigDecimal.ZERO) > 0
+                    )
+            );
         }
 
-        verifyNoMoreInteractions(exchangeClient);
+        verifyNoMoreInteractions(kafkaTemplate);
     }
 }

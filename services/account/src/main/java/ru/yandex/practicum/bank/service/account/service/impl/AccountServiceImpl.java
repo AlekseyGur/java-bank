@@ -17,6 +17,7 @@ import ru.yandex.practicum.bank.service.account.repostory.AccountRepository;
 import ru.yandex.practicum.bank.service.account.service.AccountService;
 import ru.yandex.practicum.bank.service.account.service.NumberAccountService;
 
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,8 +44,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto getAccount(String numberAccount) {
 
         Account account = accountRepository.getByNumber(numberAccount)
-                .orElseThrow(() -> new NotFoundException("Account not found by number: %s".formatted(numberAccount)));
-        ;
+                .orElseThrow(() -> new NotFoundException("Account not found by number: %s".formatted(numberAccount)));;
 
         return accountMapper.toDto(account);
     }

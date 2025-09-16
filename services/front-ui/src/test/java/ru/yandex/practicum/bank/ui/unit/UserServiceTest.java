@@ -31,20 +31,13 @@ class UserServiceTest {
 
     @Configuration
     static class Config {
-        @Bean
-        Keycloak keycloak() {
-            return mock(Keycloak.class);
-        }
-
-        @Bean
-        KeycloakAdminProperty keycloakAdminProperty() {
+        @Bean Keycloak keycloak() { return mock(Keycloak.class); }
+        @Bean KeycloakAdminProperty keycloakAdminProperty() {
             KeycloakAdminProperty prop = new KeycloakAdminProperty();
             prop.setRealm("test-realm");
             return prop;
         }
-
-        @Bean
-        UserService userService(Keycloak keycloak, KeycloakAdminProperty keycloakAdminProperty) {
+        @Bean UserService userService(Keycloak keycloak, KeycloakAdminProperty keycloakAdminProperty) {
             return new UserServiceImpl(keycloak, keycloakAdminProperty);
         }
     }
@@ -106,9 +99,11 @@ class UserServiceTest {
 
         userService.password(user, dto);
 
-        verify(userResource).resetPassword(argThat(cred -> cred.getType().equals(CredentialRepresentation.PASSWORD) &&
-                cred.getValue().equals("secure123") &&
-                !cred.isTemporary()));
+        verify(userResource).resetPassword(argThat(cred ->
+                cred.getType().equals(CredentialRepresentation.PASSWORD) &&
+                        cred.getValue().equals("secure123") &&
+                        !cred.isTemporary()
+        ));
     }
 
     @Test

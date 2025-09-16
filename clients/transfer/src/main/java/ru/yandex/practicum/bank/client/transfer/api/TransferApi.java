@@ -40,18 +40,29 @@ public interface TransferApi {
     /**
      * POST / : Перевод средств между счетами
      *
-     * @param transferDto (required)
+     * @param transferDto  (required)
      * @return Перевод успешно выполнен (status code 200)
      */
-    @Operation(operationId = "transfer", summary = "Перевод средств между счетами", tags = { "transfer" }, responses = {
+    @Operation(
+        operationId = "transfer",
+        summary = "Перевод средств между счетами",
+        tags = { "transfer" },
+        responses = {
             @ApiResponse(responseCode = "200", description = "Перевод успешно выполнен")
-    }, security = {
+        },
+        security = {
             @SecurityRequirement(name = "bearerAuth")
-    })
-    @RequestMapping(method = RequestMethod.POST, value = "/", consumes = "application/json")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/",
+        consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.OK)
-
+    
     void transfer(
-            @Parameter(name = "TransferDto", description = "", required = true) @Valid @RequestBody TransferDto transferDto);
+        @Parameter(name = "TransferDto", description = "", required = true) @Valid @RequestBody TransferDto transferDto
+    );
 
 }

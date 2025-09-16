@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
 import java.util.*;
 import jakarta.annotation.Generated;
 
@@ -32,10 +33,9 @@ public class UpdateExchangeRate200Response {
 
   /**
    * Статус операции
-   * 
    * @return status
    */
-
+  
   @Schema(name = "status", example = "OK", description = "Статус операции", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
   public String getStatus() {
@@ -83,3 +83,4 @@ public class UpdateExchangeRate200Response {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

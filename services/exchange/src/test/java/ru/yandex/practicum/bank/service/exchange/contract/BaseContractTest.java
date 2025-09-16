@@ -25,8 +25,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(classes = { ExchangeServicePracticumBankApplication.class,
-        BaseContractTest.TestContractConfiguration.class })
+@SpringBootTest(classes = {ExchangeServicePracticumBankApplication.class, BaseContractTest.TestContractConfiguration.class})
 @ActiveProfiles("test")
 public abstract class BaseContractTest {
 
@@ -49,8 +48,8 @@ public abstract class BaseContractTest {
                 .expiresAt(Instant.now().plusSeconds(3600))
                 .build();
 
-        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(jwt, jwt.getTokenValue(),
-                List.of());
+        UsernamePasswordAuthenticationToken auth =
+                new UsernamePasswordAuthenticationToken(jwt, jwt.getTokenValue(), List.of());
 
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
@@ -70,7 +69,8 @@ public abstract class BaseContractTest {
 
             when(mock.rates()).thenReturn(List.of(
                     new RateDto(Currency.USD, new BigDecimal("92.50")),
-                    new RateDto(Currency.EUR, new BigDecimal("99.90"))));
+                    new RateDto(Currency.EUR, new BigDecimal("99.90"))
+            ));
 
             return mock;
         }

@@ -20,8 +20,7 @@ class CheckServiceTest {
 
     @Configuration
     static class Config {
-        @Bean
-        CheckService checkService() {
+        @Bean CheckService checkService() {
             return new CheckServiceImpl();
         }
     }

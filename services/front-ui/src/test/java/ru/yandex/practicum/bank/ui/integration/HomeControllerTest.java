@@ -26,8 +26,9 @@ class HomeControllerTest extends AbstractIntegrationTest {
 
         Mockito.when(accountClient.getCurrentUserAccounts()).thenReturn(List.of(account));
 
+
         mockMvc.perform(get("/")
-                .with(mockOAuth2User()))
+                        .with(mockOAuth2User()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
                 .andExpect(model().attributeExists("user"))

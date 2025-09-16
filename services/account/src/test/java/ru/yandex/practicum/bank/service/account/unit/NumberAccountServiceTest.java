@@ -21,13 +21,8 @@ class NumberAccountServiceTest {
 
     @Configuration
     static class Config {
-        @Bean
-        AccountRepository accountRepository() {
-            return mock(AccountRepository.class);
-        }
-
-        @Bean
-        NumberAccountService numberAccountService(AccountRepository accountRepository) {
+        @Bean AccountRepository accountRepository() { return mock(AccountRepository.class); }
+        @Bean NumberAccountService numberAccountService(AccountRepository accountRepository) {
             return new NumberAccountServiceImpl(accountRepository);
         }
     }

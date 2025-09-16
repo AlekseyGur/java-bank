@@ -8,18 +8,18 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 @Configuration
 public class OAuthClientManagerConfig {
 
-        @Bean
-        public OAuth2AuthorizedClientManager authorizedClientManager(
-                        ClientRegistrationRepository clients,
-                        OAuth2AuthorizedClientService clientService) {
+    @Bean
+    public OAuth2AuthorizedClientManager authorizedClientManager(
+            ClientRegistrationRepository clients,
+            OAuth2AuthorizedClientService clientService) {
 
-                OAuth2AuthorizedClientProvider provider = OAuth2AuthorizedClientProviderBuilder.builder()
-                                .clientCredentials()
-                                .build();
+        OAuth2AuthorizedClientProvider provider = OAuth2AuthorizedClientProviderBuilder.builder()
+                .clientCredentials()
+                .build();
 
-                AuthorizedClientServiceOAuth2AuthorizedClientManager manager = new AuthorizedClientServiceOAuth2AuthorizedClientManager(
-                                clients, clientService);
-                manager.setAuthorizedClientProvider(provider);
-                return manager;
-        }
+        AuthorizedClientServiceOAuth2AuthorizedClientManager manager =
+                new AuthorizedClientServiceOAuth2AuthorizedClientManager(clients, clientService);
+        manager.setAuthorizedClientProvider(provider);
+        return manager;
+    }
 }
